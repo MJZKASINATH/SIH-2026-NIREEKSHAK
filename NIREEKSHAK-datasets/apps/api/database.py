@@ -16,7 +16,12 @@ primary_url = os.getenv(
     "DATABASE_URL",
     f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 )
-fallback_pg_url = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/trustus_db"
+if primary_url.startswith("postgres://"):
+    primary_url = primary_url.replace("postgres://", "postgresql://", 1)
+if primary_url.startswith("postgresql://"):
+    primary_url = primary_url.replace("postgresql://", "postgresql+psycopg2://", 1)
+
+fallback_pg_url = f"postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/trustus_db"
 sqlite_url = "sqlite:///./nireekshak.db"
 
 engine = None

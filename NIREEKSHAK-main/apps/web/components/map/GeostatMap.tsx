@@ -137,14 +137,10 @@ export default function GeostatMap({
           attributionControl: false
         });
 
-        // CartoDB Dark Matter tile layer with process.env key if provided
-        const cartoKey = process.env.NEXT_PUBLIC_CARTO_API_KEY || "";
-        const tileUrl = cartoKey
-          ? `https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png?key=${cartoKey}`
-          : `https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png`;
+        const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 
         L.tileLayer(tileUrl, {
-          subdomains: "abcd",
+          subdomains: "abc",
           maxZoom: 19
         }).addTo(map);
 
